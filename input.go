@@ -10,4 +10,6 @@ func main() {
 	outputx := x * 2
 
 	fmt.Println(outputx)
+	outputx += 1
+	fmt.Println(outputx)
 }
