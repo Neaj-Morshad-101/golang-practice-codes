@@ -1,12 +1,30 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
-func square(x *float64) {
-	*x = *x * *x
+func pinger(c chan string) {
+	for i := 0; ; i++ {
+		c <- "ping"
+	}
 }
+
+func printer(c chan string) {
+	for {
+		msg := <-c
+		fmt.Println(msg)
+		time.Sleep(time.Second * 1)
+	}
+}
+
 func main() {
-	x := 1.5
-	square(&x)
-	fmt.Println(x)
+	var c chan string = make(chan string)
+
+	go pinger(c)
+	go printer(c)
+
+	var input string
+	fmt.Scanln(&input)
 }
