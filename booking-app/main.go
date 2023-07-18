@@ -1,51 +1,93 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+const conferenceTickets int = 50
+
+var (
+	conferenceName = "Go Conference"
+	remainingTickets uint = 50
+	bookings = make([]UserData, 0)
+)
+
+type UserData struct {
+	firstName 		string
+	lastName 		string
+	email 			string
+	numberOfTickets uint 
+}
+
+var wg = sync.WaitGroup{}
 
 func main() {
-	const conferenceTickets = 50
 
-	var (
-		conferenceName = "Go Conference"
-		remainingTickets uint = conferenceTickets
-		bookings []string
+	greetUsers()
 
-		firstName string
-		lastName string
-		email string
-		ticketCount uint 
-	)
+	for {
+		userData := getUserInput()
+		isValid := validateUserInput(userData)
 
-	fmt.Printf("Type of remiainingTickets is %T\n", remainingTickets)
+		if isValid {
+			bookTicket(userData)
+			wg.Add(1)  // //increment waiting go routing count  
+			
+			go sendTicket(userData)
 
+			printFirstNames()
 
+			if remainingTickets == 0 {
+				//end program 
+				fmt.Println("Our %v is booked out. Come back next year.", conferenceName)
+				break;
+			}
+		}
+	}
+	//wait for go routine to finish before terminating the program (the main function).
+	wg.Wait()
+}
+
+func greetUsers() {
 	fmt.Printf("Welcome to %v booking application\n", conferenceName)
 	fmt.Printf("We have a total of %v tickets and %v are available\n", conferenceTickets, remainingTickets)
 	fmt.Println("Get your ticket here to attend")
+}
 
-
-	//User Inputs
+func getUserInput() UserData {
+	var userData UserData
 
 	fmt.Printf("Enter you first name : ")
-	fmt.Scan(&firstName)
+	fmt.Scan(&userData.firstName)
 
 	fmt.Printf("Enter you last name : ")
-	fmt.Scan(&lastName)
+	fmt.Scan(&userData.lastName)
 
 	fmt.Printf("Enter you email address : ")
-	fmt.Scan(&email)
+	fmt.Scan(&userData.email)
 
 	fmt.Printf("Enter number of tickets yuo want to buy : ")
-	fmt.Scan(&ticketCount)
+	fmt.Scan(&userData.numberOfTickets)
 
-	// Updates
-	remainingTickets = remainingTickets - ticketCount
-	bookings = append(bookings, firstName + " " + lastName)
+	return userData
+}
 
+func bookTicket(userData UserData) {
+	remainingTickets = remainingTickets - userData.numberOfTickets
+	bookings = append(bookings, userData)
 
-	// Results
-	
-	fmt.Printf("Thank yuu %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, ticketCount, email)
-	fmt.Printf("%v tickets are remaining for the %v\n", remainingTickets, conferenceName)
-    fmt.Printf("These are all out bookings : %v\n", bookings)	
+	fmt.Println("List of bookings is %v\n", bookings)
+
+	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", userData.firstName, userData.lastName, userData.numberOfTickets, userData.email)
+	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
+}
+
+func sendTicket(userData UserData) {
+	time.Sleep(50 * time.Second)
+	ticket := fmt.Sprintf("%v tickets for %v %v", userData.numberOfTickets, userData.firstName, userData.lastName)
+	fmt.Println("----------------------")
+	fmt.Printf("Sending ticket:\n%v \nto email address %v\n", ticket, userData.email)
+	fmt.Println("----------------------")
+	wg.Done() //decrement waiting go routing count 
 }
