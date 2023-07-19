@@ -5,19 +5,20 @@ import (
 	"sync"
 	"time"
 )
+
 const conferenceTickets int = 50
 
 var (
-	conferenceName = "Go Conference"
+	conferenceName        = "Go Conference"
 	remainingTickets uint = 50
-	bookings = make([]UserData, 0)
+	bookings              = make([]UserData, 0)
 )
 
 type UserData struct {
-	firstName 		string
-	lastName 		string
-	email 			string
-	numberOfTickets uint 
+	firstName       string
+	lastName        string
+	email           string
+	numberOfTickets uint
 }
 
 var wg = sync.WaitGroup{}
@@ -32,16 +33,16 @@ func main() {
 
 		if isValid {
 			bookTicket(userData)
-			wg.Add(1)  // //increment waiting go routing count  
-			
+			wg.Add(1) // //increment waiting go routing count
+
 			go sendTicket(userData)
 
-			printFirstNames()
+			//TODO: printFirstNames()
 
 			if remainingTickets == 0 {
-				//end program 
-				fmt.Println("Our %v is booked out. Come back next year.", conferenceName)
-				break;
+				//end program
+				fmt.Printf("Our %v is booked out. Come back next year.\n", conferenceName)
+				break
 			}
 		}
 	}
@@ -77,7 +78,7 @@ func bookTicket(userData UserData) {
 	remainingTickets = remainingTickets - userData.numberOfTickets
 	bookings = append(bookings, userData)
 
-	fmt.Println("List of bookings is %v\n", bookings)
+	fmt.Printf("List of bookings is %v\n", bookings)
 
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", userData.firstName, userData.lastName, userData.numberOfTickets, userData.email)
 	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
@@ -89,5 +90,5 @@ func sendTicket(userData UserData) {
 	fmt.Println("----------------------")
 	fmt.Printf("Sending ticket:\n%v \nto email address %v\n", ticket, userData.email)
 	fmt.Println("----------------------")
-	wg.Done() //decrement waiting go routing count 
+	wg.Done() //decrement waiting go routing count
 }
