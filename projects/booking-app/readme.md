@@ -6,13 +6,10 @@
 
 Course Link: https://www.youtube.com/watch?v=yyUHQIec83I&ab_channel=TechWorldwithNana
 
-Used Concepts: 
-
+Used Concepts:
 0:00     - Intro & Course Overview
-INTRODUCTION TO GO
 02:47    - What is Go? Why Go? How it's different?
-06:50    - Characteristics of Go and Go Use Cases
-GO SYNTAX & CONCEPTS
+06:50    - Characteristics of Go and Go Use Cases GO SYNTAX & CONCEPTS
 08:59    - Local Setup - Install Go & Editor
 12:54    - Write our First Program & Structure of a Go File
 22:02    - Variables & Constants in Go
