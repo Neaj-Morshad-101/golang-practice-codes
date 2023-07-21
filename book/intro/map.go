@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func MapFunction() {
+func mapFunction() {
 	elements := map[string]map[string]string{
 		"H": map[string]string{
 			"name":  "Hydrogen",

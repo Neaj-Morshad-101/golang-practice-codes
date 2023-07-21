@@ -56,5 +56,5 @@ func main() {
 	//x["neaj"] = 101
 	//fmt.Println(x)
 
-	//MapFunction()
+	mapFunction()
 }
