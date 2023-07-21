@@ -37,11 +37,13 @@ func main() {
 
 			go sendTicket(userData)
 
-			//TODO: printFirstNames()
+			printFirstNames()
+
+			// TODO: CHECK FROM HERE
 
 			if remainingTickets == 0 {
 				//end program
-				fmt.Printf("Our %v is booked out. Come back next year.\n", conferenceName)
+				fmt.Printf("Our %v is booked out. Come back next year.\n\n\n", conferenceName)
 				break
 			}
 		}
@@ -78,10 +80,10 @@ func bookTicket(userData UserData) {
 	remainingTickets = remainingTickets - userData.numberOfTickets
 	bookings = append(bookings, userData)
 
+	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n\n", userData.firstName, userData.lastName, userData.numberOfTickets, userData.email)
 	fmt.Printf("List of bookings is %v\n", bookings)
+	fmt.Printf("%v tickets remaining for %v\n\n\n", remainingTickets, conferenceName)
 
-	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", userData.firstName, userData.lastName, userData.numberOfTickets, userData.email)
-	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
 }
 
 func sendTicket(userData UserData) {
@@ -91,4 +93,12 @@ func sendTicket(userData UserData) {
 	fmt.Printf("Sending ticket:\n%v \nto email address %v\n", ticket, userData.email)
 	fmt.Println("----------------------")
 	wg.Done() //decrement waiting go routing count
+}
+
+func printFirstNames() {
+	firstNames := []string{}
+	for _, booking := range bookings {
+		firstNames = append(firstNames, booking.firstName)
+	}
+	fmt.Printf("The first names of bookings are: %v\n", firstNames)
 }
