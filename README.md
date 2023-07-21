@@ -1,1 +1,2 @@
-# golang-book-codes
+# golang-projects-codes
+# golang-practice-codes
