@@ -25,6 +25,8 @@ func main() {
 	//
 	//fmt.Println(output)
 
+	//loop :
+
 	//for i := 1; i <= 10; i++ {
 	//	if i%2 == 0 {
 	//		fmt.Println(i, "even")
@@ -33,6 +35,8 @@ func main() {
 	//	}
 	//
 	//}
+
+	//array and slice:
 
 	//var arr [3]int
 	//arr[1] = 100
@@ -47,4 +51,10 @@ func main() {
 	//copy(slice2, slice1)
 	//fmt.Println(slice1, slice2)
 
+	//x := make(map[string]int)
+	//x["key"] = 100
+	//x["neaj"] = 101
+	//fmt.Println(x)
+
+	//MapFunction()
 }
