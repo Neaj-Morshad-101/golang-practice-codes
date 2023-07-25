@@ -1,6 +1,5 @@
 package main
 
-
 type Shape interface {
-  Area() float64
+	Area() float64
 }
