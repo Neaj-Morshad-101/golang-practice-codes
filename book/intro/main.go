@@ -2,6 +2,8 @@ package main
 
 // this is a comment
 
+import "fmt"
+
 func main() {
 	//fmt.Println("Hello World")
 	//fmt.Println("1 + 1 =", 1+1)
@@ -56,5 +58,11 @@ func main() {
 	//x["neaj"] = 101
 	//fmt.Println(x)
 
-	mapFunction()
+	//mapFunction()
+
+	c := Circle{0, 0, 5}
+	fmt.Println(c.Area())
+
+	r := Rectangle{0, 0, 10, 10}
+	fmt.Println(r.Area())
 }
