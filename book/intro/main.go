@@ -61,8 +61,10 @@ func main() {
 	//mapFunction()
 
 	c := Circle{0, 0, 5}
-	fmt.Println(c.Area())
+	//fmt.Println(c.Area())
 
 	r := Rectangle{0, 0, 10, 10}
-	fmt.Println(r.Area())
+	//fmt.Println(r.Area())
+	
+	fmt.Println(TotalArea(&c, &r))
 }
