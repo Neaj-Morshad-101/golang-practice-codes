@@ -1,0 +1,37 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binaries
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# Directories created by `go build` and other build tools
+/build/
+/bin/
+/dist/
+
+# Dependency directories (not needed if using Go modules)
+vendor/
+
+# Go workspace file
+go.work
+
+# IDE specific files
+.vscode/
+.idea/
+
+# Other system files
+.DS_Store
+*.log
+*.swp
+*~
+
+# Ignore .env or other configuration files that might contain secrets
+.env
+.env.*
